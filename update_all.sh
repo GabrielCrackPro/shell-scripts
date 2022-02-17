@@ -5,18 +5,22 @@ BLUE='\033[0;34m'
 YELLOW='\033[1;33m'
 NC='\033[0m'
 
-echo "${GREEN}[ * ]${NC} System update script"
-# Check if sudo
-if [ "$EUID" -ne 0 ]
-  then echo "${RED}[ * ]${NC} Please run as root"
-  exit
+echo
+echo "${BLUE}[ * ]${NC} System update script"
+echo "${BLUE}[ * ]${NC} Checking system type"
+echo
+echo "${YELLOW}[ * ]${NC} Operating Systen: $(echo $OSTYPE)"
+
+if [[ "$OSTYPE" != "darwin"* ]]; then
+echo "${RED}[ * ]${NC} This script is only for MacOS"
+exit 1
 fi
 echo 
 echo "${YELLOW}[ * ]${NC} Updating system..."
 softwareupdate -l 1>/dev/null
 echo
 # Check if homebrew is installed and install if not
-
+echo "${YELLOW}[ * ]${NC} Checking if homebrew is installed..."
 if [ ! -d /opt/homebrew/Cellar ]; then
     echo "${RED}[ * ]${NC} Homebrew is not installed"
     echo "${YELLOW}[ * ]${NC} Installing homebrew..."
@@ -28,12 +32,15 @@ fi
 echo
 echo "${YELLOW}[ * ]${NC} Updating homebrew packages..."
 brew update 1>/dev/null && brew upgrade 1>/dev/null
+echo "${GREEN}[ * ]${NC} Homebrew packages updated"
 echo
 echo "${YELLOW}[ * ]${NC} Cleaning up homebrew..."
 brew cleanup
+echo "${GREEN}[ * ]${NC} Homebrew cleaned"
 echo
 echo "${YELLOW}[ * ]${NC} Removing homebrew not needed packages..."
 brew autoremove 1>/dev/null
+echo "${GREEN}[ * ]${NC} Homebrew packages removed"
 echo
 
 # check if /Users/gabrielvr/dev/dsstore-deleter/main.py exists
@@ -65,5 +72,6 @@ echo "${YELLOW}[ * ]${NC} Updating node packages..."
 npm update -g 1>/dev/null
 echo "${GREEN}[ * ]${NC} Node packages updated"
 echo
-echo "${GREEN}[ * ]${NC} Script completed"
+echo "${BLUE}[ * ]${NC} Script completed"
 echo
+exit 0
