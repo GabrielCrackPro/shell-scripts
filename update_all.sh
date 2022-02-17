@@ -43,7 +43,7 @@ brew autoremove 1>/dev/null
 echo "${GREEN}[ * ]${NC} Homebrew packages removed"
 echo
 
-# check if /Users/gabrielvr/dev/dsstore-deleter/main.py exists
+# check if ds store deleter script exists
 
 echo "${YELLOW}[ * ]${NC} Removing .DS_Store files..."
 if [ ! -f /Users/gabrielvr/dev/dsstore-deleter/main.py ]; then
