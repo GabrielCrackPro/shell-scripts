@@ -47,7 +47,7 @@ echo
 
 echo "${YELLOW}[ * ]${NC} Removing .DS_Store files..."
 if [ ! -f /Users/gabrielvr/dev/dsstore-deleter/main.py ]; then
-    echo "${RED}[ * ]${NC} dsstore-deleter.py dosent exist"
+    echo "${RED}[ * ]${NC} .DS_Store deleter script dosent exist"
     echo
     echo "Get it from https://github.com/GabrielCrackPro/Setup/blob/main/Scripts/delete-dsstore.py"
 else
